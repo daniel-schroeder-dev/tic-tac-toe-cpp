@@ -72,10 +72,6 @@ Character check_cols(Character game_board[][3]) {
         bool all_same_character = true;
         Character first_character = game_board[0][col];
         for (int row = 1; row < NUM_ROWS; row++) {
-            if (game_board[row][col] == CH_EMPTY) {
-                all_same_character = false;
-                break;
-            }
             if (game_board[row][col] != first_character) {
                 all_same_character = false;
                 break;
@@ -91,10 +87,6 @@ Character check_rows(Character game_board[][3]) {
         bool all_same_character = true;
         Character first_character = game_board[row][0];
         for (int col = 1; col < NUM_COLS; col++) {
-            if (game_board[row][col] == CH_EMPTY) {
-                all_same_character = false;
-                break;
-            }
             if (game_board[row][col] != first_character) {
                 all_same_character = false;
                 break;
