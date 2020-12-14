@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <string>
 
@@ -40,16 +42,17 @@ std::string convert_character_to_symbol(Character c) {
 void display_game_board(Character game_board[][3]) {
     for (int row = 0; row < NUM_ROWS; row++) {
         for (int col = 0; col < NUM_COLS; col++) {
-            std::cout << "| " << convert_character_to_symbol(CH_EMPTY);
+            std::cout << " | " << convert_character_to_symbol(game_board[row][col]);
         }
-        std::cout << "|\n";
+        std::cout << " |\n";
     }
 }
 
 void build_game_board(Character game_board[][3]) {
+    srand(time(NULL));
     for (int row = 0; row < NUM_ROWS; row++) {
         for (int col = 0; col < NUM_COLS; col++) {
-            game_board[row][col] = CH_EMPTY;
+            game_board[row][col] = rand() % 2 == 0 ? CH_X : CH_O;
         }
     }
 }
