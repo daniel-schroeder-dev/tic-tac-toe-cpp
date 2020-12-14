@@ -23,6 +23,7 @@ int prompt_for_selection(std::string message);
 
 Character check_for_winner(Character game_board[][3]);
 Character check_rows(Character game_board[][3]);
+Character check_cols(Character game_board[][3]);
 
 int main() {
 
@@ -57,6 +58,25 @@ int main() {
     return 0;
 }
 
+Character check_cols(Character game_board[][3]) {
+    for (int col = 0; col < NUM_COLS; col++) {
+        bool all_same_character = true;
+        Character first_character = game_board[0][col];
+        for (int row = 1; row < NUM_ROWS; row++) {
+            if (game_board[row][col] == CH_EMPTY) {
+                all_same_character = false;
+                break;
+            }
+            if (game_board[row][col] != first_character) {
+                all_same_character = false;
+                break;
+            }
+        }
+        if (all_same_character) return first_character;
+    }
+    return CH_EMPTY;
+}
+
 Character check_rows(Character game_board[][3]) {
     for (int row = 0; row < NUM_ROWS; row++) {
         bool all_same_character = true;
@@ -77,7 +97,11 @@ Character check_rows(Character game_board[][3]) {
 }
 
 Character check_for_winner(Character game_board[][3]) {
-    return check_rows(game_board);
+    Character winner;
+    winner = check_rows(game_board);
+    if (winner != CH_EMPTY) return winner;
+    winner = check_cols(game_board);
+    return winner;
 }
 
 int prompt_for_selection(std::string message) {
