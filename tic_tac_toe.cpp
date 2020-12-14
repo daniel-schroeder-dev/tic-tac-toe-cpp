@@ -10,16 +10,26 @@ enum Character { CH_X, CH_O, CH_EMPTY };
 
 void build_game_board(Character game_board[][3]);
 void display_game_board(Character game_board[][3]);
+void make_selection(Character player, int row, int col);
 std::string convert_character_to_symbol(Character c);
 
 int main() {
 
     Character game_board[3][3];
+    Character player_1 = CH_X;
+    Character player_2 = CH_O;
 
     build_game_board(game_board);
     display_game_board(game_board);
 
+    make_selection(player_1, 0, 0);
+    display_game_board(game_board);
+
     return 0;
+}
+
+void make_selection(Character player, int row, int col) {
+
 }
 
 std::string convert_character_to_symbol(Character c) {
