@@ -11,6 +11,8 @@ enum Character { CH_X, CH_O, CH_EMPTY };
 void build_game_board(Character game_board[][3]);
 void display_game_board(Character game_board[][3]);
 void make_selection(Character player, int row, int col, Character game_board[][3]);
+std::string get_player_avatar(Character player);
+
 bool is_on_game_board(int row, int col);
 bool square_already_filled(int row, int col, Character game_board[][3]);
 
@@ -32,6 +34,7 @@ int main() {
     display_game_board(game_board);
 
     while (should_continue) {
+        std::cout << "Current Player: " << get_player_avatar(current_player) << std::endl;
         std::cout << "Select row: ";
         std::cin >> row;
         std::cout << "Select col: ";
@@ -44,6 +47,10 @@ int main() {
     }
 
     return 0;
+}
+
+std::string get_player_avatar(Character player) {
+    return player == CH_X ? "X" : "O";
 }
 
 bool square_already_filled(int row, int col, Character game_board[][3]) {
