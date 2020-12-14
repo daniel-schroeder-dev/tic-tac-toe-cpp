@@ -19,7 +19,7 @@ bool square_already_filled(int row, int col, Character game_board[][3]);
 std::string get_player_avatar(Character player);
 std::string convert_character_to_symbol(Character c);
 
-int prompt_for_row_col_selection(std::string message);
+int prompt_for_selection(std::string message);
 
 int main() {
 
@@ -38,8 +38,8 @@ int main() {
 
     while (should_continue) {
         display_player_avatar(current_player);
-        row = prompt_for_row_col_selection("Select row: ");
-        col = prompt_for_row_col_selection("Select col: ");
+        row = prompt_for_selection("Select row: ");
+        col = prompt_for_selection("Select col: ");
     
         make_selection(current_player, row, col, game_board);
         display_game_board(game_board); 
@@ -50,7 +50,7 @@ int main() {
     return 0;
 }
 
-int prompt_for_row_col_selection(std::string message) {
+int prompt_for_selection(std::string message) {
     int row_col_selection;
     std::cout << message;
     std::cin >> row_col_selection;
