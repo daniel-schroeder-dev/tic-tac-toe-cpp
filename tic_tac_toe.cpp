@@ -24,6 +24,7 @@ int prompt_for_selection(std::string message);
 Character check_for_winner(Character game_board[][3]);
 Character check_rows(Character game_board[][3]);
 Character check_cols(Character game_board[][3]);
+Character check_diagonals(Character game_board[][3]);
 
 int main() {
 
@@ -56,6 +57,16 @@ int main() {
     std::cout << get_player_avatar(winner) << " wins!!!" << std::endl;
 
     return 0;
+}
+
+Character check_diagonals(Character game_board[][3]) {
+    if (game_board[0][0] == game_board[1][1] && game_board[0][0] == game_board[2][2]) {
+        return game_board[0][0];
+    } 
+    if (game_board[0][2] == game_board[1][1] && game_board[0][2] == game_board[2][0]) {
+        return game_board[0][2];
+    } 
+    return CH_EMPTY;
 }
 
 Character check_cols(Character game_board[][3]) {
@@ -101,6 +112,8 @@ Character check_for_winner(Character game_board[][3]) {
     winner = check_rows(game_board);
     if (winner != CH_EMPTY) return winner;
     winner = check_cols(game_board);
+    if (winner != CH_EMPTY) return winner;
+    winner = check_diagonals(game_board);
     return winner;
 }
 
