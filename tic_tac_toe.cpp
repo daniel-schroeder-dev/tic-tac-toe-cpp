@@ -23,14 +23,19 @@ int main() {
     display_game_board(game_board);
 
     make_selection(player_1, 0, 0, game_board);
-    make_selection(player_2, 1, 1, game_board);
+    make_selection(player_2, 3, 1, game_board);
+    make_selection(player_1, 1, 0, game_board);
     display_game_board(game_board);
 
     return 0;
 }
 
 void make_selection(Character player, int row, int col, Character game_board[][3]) {
-    game_board[row][col] = player;
+    if ((row >= NUM_ROWS || row < 0) || (col >= NUM_COLS || col < 0)) {
+        std::cout << "Invalid selection, you lose your turn!" << std::endl;
+    } else {
+        game_board[row][col] = player;
+    }
 }
 
 std::string convert_character_to_symbol(Character c) {
