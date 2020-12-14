@@ -11,6 +11,9 @@ enum Character { CH_X, CH_O, CH_EMPTY };
 void build_game_board(Character game_board[][3]);
 void display_game_board(Character game_board[][3]);
 void make_selection(Character player, int row, int col, Character game_board[][3]);
+bool is_on_game_board(int row, int col);
+bool square_already_filled(int row, int col, Character game_board[][3]);
+
 std::string convert_character_to_symbol(Character c);
 
 int main() {
@@ -25,13 +28,22 @@ int main() {
     make_selection(player_1, 0, 0, game_board);
     make_selection(player_2, 3, 1, game_board);
     make_selection(player_1, 1, 0, game_board);
+    make_selection(player_2, 1, 0, game_board);
     display_game_board(game_board);
 
     return 0;
 }
 
+bool square_already_filled(int row, int col, Character game_board[][3]) {
+    return game_board[row][col] != CH_EMPTY;
+}
+
+bool is_on_game_board(int row, int col) {
+    return (row >= 0 && row < NUM_ROWS) && (col >= 0 && col < NUM_COLS);
+}
+
 void make_selection(Character player, int row, int col, Character game_board[][3]) {
-    if ((row >= NUM_ROWS || row < 0) || (col >= NUM_COLS || col < 0)) {
+    if (!is_on_game_board(row, col) || square_already_filled(row, col, game_board)) {
         std::cout << "Invalid selection, you lose your turn!" << std::endl;
     } else {
         game_board[row][col] = player;
