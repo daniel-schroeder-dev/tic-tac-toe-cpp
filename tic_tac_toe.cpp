@@ -21,15 +21,27 @@ int main() {
     Character game_board[3][3];
     Character player_1 = CH_X;
     Character player_2 = CH_O;
+    Character current_player = player_1;
+    
+    bool should_continue = true;
+
+    int row;
+    int col;
 
     build_game_board(game_board);
     display_game_board(game_board);
 
-    make_selection(player_1, 0, 0, game_board);
-    make_selection(player_2, 3, 1, game_board);
-    make_selection(player_1, 1, 0, game_board);
-    make_selection(player_2, 1, 0, game_board);
-    display_game_board(game_board);
+    while (should_continue) {
+        std::cout << "Select row: ";
+        std::cin >> row;
+        std::cout << "Select col: ";
+        std::cin >> col;
+    
+        make_selection(current_player, row, col, game_board);
+        display_game_board(game_board); 
+
+        current_player = current_player == player_1 ? player_2 : player_1;
+    }
 
     return 0;
 }
